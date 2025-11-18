@@ -7,12 +7,12 @@ import tailwindCaido from "@caido/tailwindcss";
 import path from "path";
 import prefixwrap from "postcss-prefixwrap";
 
-const id = "frontend-vue";
+const id = "caidosurf";
 export default defineConfig({
   id,
-  name: "Frontend Vue",
-  description: "Plugin template with frontend using VueJS",
-  version: "0.0.0",
+  name: "Surf for Caido",
+  description: "Probe domains for candidates for SSRF testing. The tool is inspired by SLCyber's Surf.",
+  version: "0.0.1",
   author: {
     name: "Caido Labs Inc.",
     email: "dev@caido.io",

@@ -1,10 +1,5 @@
-# VueJS Frontend Template
+# Surf for Caido
 
-This template should be used as a starting point for creating a new plugin with a VueJS frontend.
+Surf is a plugin for Caido that helps probe domains for candidates for SSRF (Server-Side Request Forgery) testing. Inspired by SLCyber's Surf, it integrates with Caido's frontend and backend SDKs to provide a modern SSRF testing workflow.
 
-## Features
-
-- [pnpm](https://pnpm.io/) as package manager
-- [TypeScript](https://www.typescriptlang.org/)
-- [VueJS](https://vuejs.org/)
-- [PrimeVue](https://primevue.org/) for UI components
+Original SLCyber/Assetnote plugin: https://github.com/assetnote/surf/
