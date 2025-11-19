@@ -71,7 +71,9 @@ export function startScan(
   // Start processing domains with concurrency control
   processDomains(domains, timeout, concurrency, state).catch((error) => {
     console.error(
-      `[Scanner] Scan ${scanId} error: ${error instanceof Error ? error.message : String(error)}`,
+      `[Scanner] Scan ${scanId} error: ${
+        error instanceof Error ? error.message : String(error)
+      }`,
     );
   });
 }
@@ -198,7 +200,9 @@ async function processDomains(
       }
     } catch (error) {
       console.error(
-        `[Scanner] processDomainAsync: Error processing domain ${domain}: ${error instanceof Error ? error.message : String(error)}`,
+        `[Scanner] processDomainAsync: Error processing domain ${domain}: ${
+          error instanceof Error ? error.message : String(error)
+        }`,
       );
     } finally {
       processing.delete(domain);
@@ -207,7 +211,9 @@ async function processDomains(
         state.status.completed = completed;
         if (completed % 10 === 0 || completed === domains.length) {
           console.log(
-            `[SURF - Scanner] processDomains: Progress ${completed}/${domains.length} (${Math.round((completed / domains.length) * 100)}%)`,
+            `[SURF - Scanner] processDomains: Progress ${completed}/${
+              domains.length
+            } (${Math.round((completed / domains.length) * 100)}%)`,
           );
         }
       }
@@ -317,7 +323,9 @@ async function processDomain(
   }
 
   console.log(
-    `[SURF - Scanner] processDomain: ${domain} resolved to ${ips.length} IP(s): ${ips.join(", ")}`,
+    `[SURF - Scanner] processDomain: ${domain} resolved to ${
+      ips.length
+    } IP(s): ${ips.join(", ")}`,
   );
   // Check if any IP is private
   const hasPrivateIP = ips.some((ip) => isPrivateIP(ip));

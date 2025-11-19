@@ -64,7 +64,9 @@ function startScanAPI(
       return { kind: "Error", error: "Concurrency must be greater than 0" };
     }
 
-    const scanId = `scan-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+    const scanId = `scan-${Date.now()}-${Math.random()
+      .toString(36)
+      .substring(2, 9)}`;
     sdk.console.log(
       `[SURF - API] Creating scan ${scanId} with ${domains.length} domains`,
     );
@@ -104,7 +106,9 @@ function startScanAPI(
     return { kind: "Ok", value: { scanId } };
   } catch (error) {
     sdk.console.log(
-      `[SURF - API] startScan error: ${error instanceof Error ? error.message : "Unknown error"}`,
+      `[SURF - API] startScan error: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`,
     );
     return {
       kind: "Error",
@@ -149,7 +153,9 @@ function getScanStatusAPI(
     return { kind: "Ok", value: result };
   } catch (error) {
     sdk.console.log(
-      `[SURF - API] getScanStatus error: ${error instanceof Error ? error.message : "Unknown error"}`,
+      `[SURF - API] getScanStatus error: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`,
     );
     return {
       kind: "Error",
@@ -193,7 +199,9 @@ function getScanResultsAPI(
     };
   } catch (error) {
     sdk.console.log(
-      `[SURF - API] getScanResults error: ${error instanceof Error ? error.message : "Unknown error"}`,
+      `[SURF - API] getScanResults error: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`,
     );
     return {
       kind: "Error",
@@ -245,13 +253,17 @@ async function uploadInternalIPsToFilesAPI(
       ? results.internal.length * 2
       : results.internal.length;
     sdk.console.log(
-      `[SURF - API] Successfully created internal IPs file: ${file.name} (${itemCount} ${prependProtocol ? "URLs" : "hosts"})`,
+      `[SURF - API] Successfully created internal IPs file: ${
+        file.name
+      } (${itemCount} ${prependProtocol ? "URLs" : "hosts"})`,
     );
 
     return { kind: "Ok", value: file.name };
   } catch (error) {
     sdk.console.log(
-      `[SURF - API] uploadInternalIPsToFiles error: ${error instanceof Error ? error.message : "Unknown error"}`,
+      `[SURF - API] uploadInternalIPsToFiles error: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`,
     );
     return {
       kind: "Error",
@@ -303,13 +315,17 @@ async function uploadExternalIPsToFilesAPI(
       ? results.external.length * 2
       : results.external.length;
     sdk.console.log(
-      `[SURF - API] Successfully created external IPs file: ${file.name} (${itemCount} ${prependProtocol ? "URLs" : "hosts"})`,
+      `[SURF - API] Successfully created external IPs file: ${
+        file.name
+      } (${itemCount} ${prependProtocol ? "URLs" : "hosts"})`,
     );
 
     return { kind: "Ok", value: file.name };
   } catch (error) {
     sdk.console.log(
-      `[SURF - API] uploadExternalIPsToFiles error: ${error instanceof Error ? error.message : "Unknown error"}`,
+      `[SURF - API] uploadExternalIPsToFiles error: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`,
     );
     return {
       kind: "Error",
@@ -361,13 +377,17 @@ async function uploadCombinedWordlistToFilesAPI(
       ? results.combined.length * 2
       : results.combined.length;
     sdk.console.log(
-      `[SURF - API] Successfully created combined wordlist file: ${file.name} (${itemCount} ${prependProtocol ? "URLs" : "hosts"})`,
+      `[SURF - API] Successfully created combined wordlist file: ${
+        file.name
+      } (${itemCount} ${prependProtocol ? "URLs" : "hosts"})`,
     );
 
     return { kind: "Ok", value: file.name };
   } catch (error) {
     sdk.console.log(
-      `[SURF - API] uploadCombinedWordlistToFiles error: ${error instanceof Error ? error.message : "Unknown error"}`,
+      `[SURF - API] uploadCombinedWordlistToFiles error: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`,
     );
     return {
       kind: "Error",
@@ -410,7 +430,9 @@ function downloadInternalIPsAPI(
     return { kind: "Ok", value: content };
   } catch (error) {
     sdk.console.log(
-      `[SURF - API] downloadInternalIPs error: ${error instanceof Error ? error.message : "Unknown error"}`,
+      `[SURF - API] downloadInternalIPs error: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`,
     );
     return {
       kind: "Error",
@@ -453,7 +475,9 @@ function downloadExternalIPsAPI(
     return { kind: "Ok", value: content };
   } catch (error) {
     sdk.console.log(
-      `[SURF - API] downloadExternalIPs error: ${error instanceof Error ? error.message : "Unknown error"}`,
+      `[SURF - API] downloadExternalIPs error: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`,
     );
     return {
       kind: "Error",
@@ -496,7 +520,9 @@ function downloadCombinedWordlistAPI(
     return { kind: "Ok", value: content };
   } catch (error) {
     sdk.console.log(
-      `[SURF - API] downloadCombinedWordlist error: ${error instanceof Error ? error.message : "Unknown error"}`,
+      `[SURF - API] downloadCombinedWordlist error: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`,
     );
     return {
       kind: "Error",
@@ -525,7 +551,9 @@ function cancelScanAPI(
     return { kind: "Ok", value: undefined };
   } catch (error) {
     sdk.console.log(
-      `[SURF - API] cancelScan error: ${error instanceof Error ? error.message : "Unknown error"}`,
+      `[SURF - API] cancelScan error: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`,
     );
     return {
       kind: "Error",
@@ -556,7 +584,10 @@ export function init(sdk: SDK<API, BackendEvents>) {
   sdk.api.register("getScanResults", getScanResultsAPI);
   sdk.api.register("uploadInternalIPsToFiles", uploadInternalIPsToFilesAPI);
   sdk.api.register("uploadExternalIPsToFiles", uploadExternalIPsToFilesAPI);
-  sdk.api.register("uploadCombinedWordlistToFiles", uploadCombinedWordlistToFilesAPI);
+  sdk.api.register(
+    "uploadCombinedWordlistToFiles",
+    uploadCombinedWordlistToFilesAPI,
+  );
   sdk.api.register("downloadInternalIPs", downloadInternalIPsAPI);
   sdk.api.register("downloadExternalIPs", downloadExternalIPsAPI);
   sdk.api.register("downloadCombinedWordlist", downloadCombinedWordlistAPI);
