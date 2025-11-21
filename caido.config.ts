@@ -7,12 +7,12 @@ import tailwindCaido from "@caido/tailwindcss";
 import path from "path";
 import prefixwrap from "postcss-prefixwrap";
 
-const id = "caidosurf";
+const id = "slcyber-tools";
 export default defineConfig({
   id,
-  name: "Surf for Caido",
-  description: "Probe domains for candidates for SSRF testing. The tool is inspired by SLCyber's Surf.",
-  version: "0.0.1",
+  name: "SLCyber Tools",
+  description: "A collection of tools from SLCyber including Surf for SSRF testing and SLCyber custom wordlists.",
+  version: "0.0.2",
   author: {
     name: "Caido Labs Inc.",
     email: "dev@caido.io",

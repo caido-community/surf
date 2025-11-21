@@ -1,6 +1,6 @@
 {
-  "name": "caidosurf",
-  "version": "0.0.0",
+  "name": "slcyber-tools",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "typecheck": "pnpm -r typecheck",

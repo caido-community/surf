@@ -1,4 +1,5 @@
 import type { DefineAPI, DefineEvents, SDK } from "caido:plugin";
+import { fetch } from "caido:http";
 
 import {
   cancelScan,
@@ -562,6 +563,57 @@ function cancelScanAPI(
   }
 }
 
+async function uploadWordlistFromUrlAPI(
+  sdk: SDK<API, BackendEvents>,
+  url: string,
+  filename: string,
+): Promise<Result<string>> {
+  sdk.console.log(
+    `[SURF - API] uploadWordlistFromUrl called for ${filename} from ${url}`,
+  );
+
+  try {
+    // Download the file from the CDN
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to download wordlist: HTTP ${response.status} ${response.statusText}`,
+      );
+    }
+
+    const content = await response.text();
+
+    // Upload to Caido
+    const file = await sdk.hostedFile.create({
+      name: filename,
+      content: content,
+    });
+
+    sdk.console.log(
+      `[SURF - API] Successfully uploaded wordlist ${filename} to Caido`,
+    );
+
+    return { kind: "Ok", value: file.name };
+  } catch (error) {
+    sdk.console.log(
+      `[SURF - API] uploadWordlistFromUrl error: ${
+        error instanceof Error ? error.message : "Unknown error"
+      }`,
+    );
+    return {
+      kind: "Error",
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
+  }
+}
+
 // Export the API type definition
 export type API = DefineAPI<{
   startScan: typeof startScanAPI;
@@ -574,6 +626,7 @@ export type API = DefineAPI<{
   downloadExternalIPs: typeof downloadExternalIPsAPI;
   downloadCombinedWordlist: typeof downloadCombinedWordlistAPI;
   cancelScan: typeof cancelScanAPI;
+  uploadWordlistFromUrl: typeof uploadWordlistFromUrlAPI;
 }>;
 
 // Plugin initialization
@@ -592,6 +645,7 @@ export function init(sdk: SDK<API, BackendEvents>) {
   sdk.api.register("downloadExternalIPs", downloadExternalIPsAPI);
   sdk.api.register("downloadCombinedWordlist", downloadCombinedWordlistAPI);
   sdk.api.register("cancelScan", cancelScanAPI);
+  sdk.api.register("uploadWordlistFromUrl", uploadWordlistFromUrlAPI);
   sdk.console.log(
     "[SURF - Plugin] Surf backend plugin initialized successfully",
   );

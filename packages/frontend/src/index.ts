@@ -30,19 +30,19 @@ export const init = (sdk: FrontendSDK) => {
   // Set the ID of the root element
   // Replace this with the value of the prefixWrap plugin in caido.config.ts
   // This is necessary to prevent styling conflicts between plugins
-  root.id = `plugin--frontend-vue`;
+  root.id = `plugin--slcyber-tools`;
 
   // Mount the app to the root element
   app.mount(root);
 
   // Add the page to the navigation
   // Make sure to use a unique name for the page
-  sdk.navigation.addPage("/surf", {
+  sdk.navigation.addPage("/slcyber-tools", {
     body: root,
   });
 
   // Add a sidebar item
-  sdk.sidebar.registerItem("Surf", "/surf", {
+  sdk.sidebar.registerItem("SLCyber Tools", "/slcyber-tools", {
     icon: "fas fa-wave-square",
   });
 };
